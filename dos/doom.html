@@ -53,9 +53,24 @@
         color: #888;
         text-align: center;
       }
+
+.btn-voltar {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
     </style>
   </head>
   <body>
+    <button class="btn-voltar" onclick="window.history.back()">
+      ← Voltar
+    </button>
+
     <div id="dosbox"></div>
     
     <button onclick="dosbox.requestFullScreen();">Jogar em Tela Cheia</button>

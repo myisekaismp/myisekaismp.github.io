@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>JS-DOS: DOOM</title>
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #2c2c2c;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      #dosbox {
+        width: 640px; 
+        height: 400px;
+        border: 4px solid #333;
+        border-radius: 4px;
+        background-color: #000;
+      }
+
+      .dosbox-container { width: 640px; height: 400px; }
+      .dosbox-start {
+        color: #32C7FF !important;
+      }
+      .dosbox-powered {
+        display: none !important;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 25px;
+        background: #FF2D9B ;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .instructions {
+        margin-top: 15px;
+        font-size: 0.8em;
+        color: #888;
+        text-align: center;
+      }
+
+      .btn-voltar {
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>    
+    <button class="btn-voltar" onclick="window.history.back()">
+      ← Voltar
+    </button>
+
+    <div id="dosbox"></div>
+    
+    <button onclick="dosbox.requestFullScreen();">Jogar em Tela Cheia</button>
+
+    <div class="instructions">
+    </div>
+
+    <script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"></script>
+    <script type="text/javascript">
+      var dosbox = new Dosbox({
+        id: "dosbox",
+        onload: function (dosbox) {
+          dosbox.run("game/DOOM2.zip", "DOOM2.EXE");
+        },
+        onrun: function (dosbox, app) {
+          console.log("App '" + app + "' is runned");
+        }
+      });
+    </script>
+  </body>
+</html>
