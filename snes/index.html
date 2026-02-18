@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNES Emulator: Super Nintendo</title>
+    <link rel="stylesheet" href="assets/style.css">
+  </head>
+  <body>
+
+    <a href="../index.html" class="btn-voltar">
+      ← Voltar
+    </a>
+
+    <div id="snes-container">
+        <div id="game"></div>
+    </div>
+
+    <div class="instructions" id="instructions"></div>
+
+    <script>
+        const games = {
+            supermarioworld: {
+                core: 'snes',
+                gameUrl: 'game/SuperMarioWorld.smc',
+                instructions: ''
+            }
+        };
+
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const gameParam = getUrlParameter('game');
+        const gameConfig = games[gameParam] || games.supermarioworld; // Default
+
+        EJS_player = '#game';
+        EJS_core = gameConfig.core;
+        EJS_gameUrl = gameConfig.gameUrl;
+        EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+
+        if (gameConfig.instructions) {
+            document.getElementById('instructions').innerHTML = gameConfig.instructions;
+        }
+    </script>
+    <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+
+  </body>
+</html>

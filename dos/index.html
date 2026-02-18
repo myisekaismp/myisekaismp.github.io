@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>JS-DOS: Game</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <style type="text/css" id="dynamic-styles"></style>
+  </head>
+  <body>
+    <button class="btn-voltar" onclick="window.location.href='../index.html'">
+      ← Voltar
+    </button>
+
+    <div id="dosbox"></div>
+    
+    <button onclick="dosbox.requestFullScreen();">Jogar em Tela Cheia</button>
+
+    <div class="instructions" id="instructions"></div>
+
+    <script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"></script>
+    <script type="text/javascript">
+      const games = {
+        doom: {
+          height: '400px',
+          path: 'game/DOOM.zip',
+          exe: 'DOOM/DOOM.EXE',
+          instructions: 'Use as <b>setas</b> para mover | <b>S</b> para atirar<br><b>W</b> para abrir portas | <b>A</b> e <b>D</b> para mover lateralmente.'
+        },
+        doom2: {
+          height: '400px',
+          path: 'game/DOOM2.zip',
+          exe: 'DOOM2.EXE',
+          instructions: 'Use as <b>setas</b> para mover | <b>Alt + Setas</b> para Strafe<br><b>Ctrl</b> para atirar | <b>Espaço</b> para abrir portas | <b>Tab</b> para ver o mapa.'
+        },
+        vikings: {
+          height: '480px',
+          path: 'game/VIKINGS.zip',
+          exe: 'VIKINGS.EXE',
+          instructions: 'Use as <b>setas</b> para mover | <b>S</b> para interagir<br><b>F</b> e <b>Espaço</b> para habilidade primária | <b>D</b> para habilidade secundária<br><b>E</b> para usar itens | <b>Tab</b> para escolher item | <b>Ctrl</b> para trocar de personagem'
+        }
+      };
+
+      function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      const gameParam = getUrlParameter('game');
+      const gameConfig = games[gameParam] || games.doom; // Default para doom se não encontrar
+
+      const styleElement = document.getElementById('dynamic-styles');
+      styleElement.textContent = `
+        #dosbox { height: ${gameConfig.height}; }
+        .dosbox-container { height: ${gameConfig.height}; }
+      `;
+
+      document.getElementById('instructions').innerHTML = gameConfig.instructions;
+
+      window.addEventListener('keydown', function (e) {
+        if (e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+          e.preventDefault(); 
+        }
+      }, { capture: true });
+
+      var dosbox = new Dosbox({
+        id: "dosbox",
+        onload: function (dosbox) {
+          dosbox.run(gameConfig.path, gameConfig.exe);
+        },
+        onrun: function (dosbox, app) {
+          console.log("App '" + app + "' is runned");
+        }
+      });
+    </script>
+  </body>
+</html>
