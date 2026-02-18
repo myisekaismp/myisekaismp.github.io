@@ -40,14 +40,22 @@
         EJS_gameUrl = gameConfig.gameUrl;
         EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
         EJS_startOnLoaded = true;
+        EJS_defaultSaveLocation = 'browser';
 
         EJS_settings = {
-            "vsync": false
+            "vsync": false,
+            "saveStateLocation": "browser"
         };
         EJS_overrideConfig = {
             "video_vsync": "false",
-            "video_threaded_video": "true"
+            "video_threaded_video": "false",// OBRIGATÓRIO: 'true' quebra o redimensionamento no MCEF
+            "video_gpu_screenshot": "false",
+            "video_smooth": "false",         // Mantém pixels nítidos (melhor para MCEF)
+            "savestate_auto_load": "true",
+            "internal_autosave_interval": "60"
         };
+        
+        var EJS_defaultSaveLocation = 'browser';
 
         // --- ADAPTAÇÃO PARA WEBDISPLAYS / MCEF / SAVESTATE ---
         EJS_gameparenturl = '../snes/';
@@ -71,7 +79,10 @@
             cacheManager: false,
             exitEmulation: false
         }
+
         // --- ADAPTAÇÃO PARA WEBDISPLAYS / MCEF / SAVESTATE ---
+
+        EJS_DEBUG_XX = true;
 
         if (gameConfig.instructions) {
             document.getElementById('instructions').innerHTML = gameConfig.instructions;
