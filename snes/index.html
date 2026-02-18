@@ -22,8 +22,9 @@
         const games = {
             supermarioworld: {
                 core: 'snes',
+                gameName: 'SuperMarioWorld',
                 gameUrl: 'game/SuperMarioWorld.smc',
-                instructions: 'O save do jogo é salvo automaticamente no cache do navegador.'
+                instructions: 'O save <b>não está confiável</b>.'
             }
         };
 
@@ -38,20 +39,22 @@
         EJS_player = '#game';
         EJS_core = gameConfig.core;
         EJS_gameUrl = gameConfig.gameUrl;
+        EJS_gameName = gameConfig.gameName;
         EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
         EJS_startOnLoaded = true;
+        EJS_color = '#0064ff';
         
         EJS_defaultOptions = {
             'save-state-location': 'browser'
         };
         EJS_overrideConfig = {
             "video_vsync": "false",
-            "video_threaded_video": "false",
-            "video_gpu_screenshot": "false",
-            "video_smooth": "false",
+            // "video_threaded_video": "false",
+            // "video_gpu_screenshot": "false",
+            // "video_smooth": "false",
         };
 
-        EJS_gameparenturl = '../snes/';
+        // EJS_gameparenturl = '../snes/';
         EJS_Buttons = {
             playPause: true,
             restart: true,
