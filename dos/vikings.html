@@ -21,13 +21,13 @@
 
       #dosbox {
         width: 640px; 
-        height: 400px;
+        height: 480px;
         border: 4px solid #333;
         border-radius: 4px;
         background-color: #000;
       }
 
-      .dosbox-container { width: 640px; height: 400px; }
+      .dosbox-container { width: 640px; height: 480px; }
       .dosbox-start {
         color: #32C7FF !important;
       }
@@ -72,7 +72,7 @@
       }
     </style>
   </head>
-  <body>    
+  <body>
     <button class="btn-voltar" onclick="window.location.href='../index.html'">
       ← Voltar
     </button>
@@ -80,8 +80,11 @@
     <div id="dosbox"></div>
     
     <button onclick="dosbox.requestFullScreen();">Jogar em Tela Cheia</button>
-    <p>DOOM II</p>
+    <p>THE LOST VIKINGS</p>
     <div class="instructions">
+      Use as <b>setas</b> para mover | <b>S</b> para interagir<br>
+      <b>F</b> e <b>Espaço</b> para habilidade primária | <b>D</b> para habilidade secundária<br>
+      <b>E</b> para usar itens | <b>Tab</b> para escolher item | <b>Ctrl</b> para trocar de personagem
     </div>
 
     <script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"></script>
@@ -89,7 +92,7 @@
       var dosbox = new Dosbox({
         id: "dosbox",
         onload: function (dosbox) {
-          dosbox.run("game/DOOM2.zip", "DOOM2.EXE");
+          dosbox.run("game/VIKINGS.zip", "VIKINGS.EXE");
         },
         onrun: function (dosbox, app) {
           console.log("App '" + app + "' is runned");

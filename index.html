@@ -89,13 +89,75 @@
         .btn-c:hover {
             background-color: #67c56b;
         }
+
+        .lista-jogos {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .lista-jogos a {
+            display: block;
+            color: #3A3A3A;
+            margin: 0;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        /* Estilização da Grade de Jogos */
+        .lista-jogos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .game-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .game-card:hover {
+            border-color: #32C7FF;
+            background: #e1f5fe;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Ícone fake ou Emoji para dar vida */
+        .game-card::before {
+            content: '🎮';
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        /* Cores específicas para diferenciar categorias */
+        .game-card.external::before { content: '🌐'; }
+        .game-card.retro::before { content: '🕹️'; }
+
+        .btn-voltar {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <img src="https://raw.githubusercontent.com/myisekaismp/raw-files/main/myisekai_logo.png" alt="Logo My Isekai" class="logo">
 
-    <div class="container">
+    <div class="container" id="container-inicio">
         <h1>Bem-vindo ao Sistema de Entretenimento</h1>
         
         <p>
@@ -111,11 +173,30 @@
         </div>
 
         <br>
-
-        <a href="https://www.retrogames.cc" class="btn-jogar">JOGOS RETRO</a>
-		<a href="./treino" class="btn-jogar btn-b">"TERMO"</a>
-		<a href="./dos/doom.html" class="btn-jogar btn-c">DOOM</a>
-		<a href="./dos/doom2.html" class="btn-jogar btn-c">DOOM 2</a>
+        
+        <a href="#" class="btn-jogar" onclick="document.getElementById('container-inicio').style.display='none'; document.getElementById('container-jogos').style.display='block'; return false;">IR PARA JOGOS</a>
+    </div>
+    <div class="container" id="container-jogos" style="display: none;">
+        <h1>Biblioteca de Aplicativos</h1>
+    
+        <p>
+            Selecione um título abaixo para iniciar a execução. 
+            <br><small style="color: #888;">Lembre-se: Canonicamente, este tablet <strong>NÃO possui acesso à internet</strong>.</small>
+        </p>
+    
+        <div class="lista-jogos">
+            <a href="./treino" class="game-card">TERMO</a>
+            <a href="./dos/doom.html" class="game-card retro">DOOM</a>
+            <a href="./dos/doom2.html" class="game-card retro">DOOM 2</a>
+            <a href="./dos/vikings.html" class="game-card retro">VIKINGS</a>
+            <a href="https://www.retrogames.cc" class="game-card external">JOGOS RETRO</a>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+    
+        <a href="#" class="btn-jogar btn-b btn-voltar" onclick="document.getElementById('container-jogos').style.display='none'; document.getElementById('container-inicio').style.display='block'; return false;">
+            ⬅ VOLTAR AO INÍCIO
+        </a>
     </div>
 
 </body>
