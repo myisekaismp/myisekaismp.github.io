@@ -88,21 +88,12 @@
 
     <script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"></script>
     <script type="text/javascript">
-      // --- BLOQUEIO DE TECLAS DE SISTEMA ---
       window.addEventListener('keydown', function (e) {
-        // 1. Bloqueia Alt + Setas (Navegação de página: Voltar/Avançar)
         if (e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-        }
-
-        // 2. Bloqueia a tecla Alt sozinha (Evita que o Windows tire o foco para o menu do browser)
-        if (e.key === 'Alt') {
-            e.preventDefault();
-            e.stopImmediatePropagation();
+          e.preventDefault(); 
         }
       }, { capture: true });
-      
+
       var dosbox = new Dosbox({
         id: "dosbox",
         onload: function (dosbox) {
