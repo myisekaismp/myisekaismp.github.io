@@ -18,12 +18,17 @@
 
     <div class="instructions" id="instructions"></div>
 
+    <div style="margin-top: 10px;">
+        <button onclick="forcarSave()" style="background: #4CAF50;">Salvar no Cache</button>
+        <button onclick="forcarLoad()" style="background: #2196F3;">Carregar do Cache</button>
+    </div>
+
     <script>
         const games = {
             supermarioworld: {
                 core: 'snes',
                 gameUrl: 'game/SuperMarioWorld.smc',
-                instructions: ''
+                instructions: 'O save do jogo é salvo automaticamente no cache do navegador.'
             }
         };
 
@@ -33,12 +38,45 @@
         }
 
         const gameParam = getUrlParameter('game');
-        const gameConfig = games[gameParam] || games.supermarioworld; // Default
+        const gameConfig = games[gameParam] || games.supermarioworld;
 
         EJS_player = '#game';
         EJS_core = gameConfig.core;
         EJS_gameUrl = gameConfig.gameUrl;
         EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+        EJS_startOnLoaded = true;
+
+        EJS_settings = {
+            "vsync": false
+        };
+        EJS_overrideConfig = {
+            "video_vsync": "false",
+            "video_threaded_video": "true"
+        };
+
+        // --- ADAPTAÇÃO PARA WEBDISPLAYS / MCEF / SAVESTATE ---
+        EJS_gameparenturl = '../snes/';
+        EJS_Buttons = {
+            playPause: true,
+            restart: true,
+            mute: false,
+            settings: true,
+            fullscreen: true,
+            saveState: false,
+            loadState: false,
+            screenRecord: false,
+            gamepad: true,
+            cheat: false,
+            volume: true,
+            saveSavFiles: false,
+            loadSavFiles: false,
+            quickSave: false,
+            quickLoad: false,
+            screenshot: false,
+            cacheManager: false,
+            exitEmulation: false
+        }
+        // --- ADAPTAÇÃO PARA WEBDISPLAYS / MCEF / SAVESTATE ---
 
         if (gameConfig.instructions) {
             document.getElementById('instructions').innerHTML = gameConfig.instructions;
