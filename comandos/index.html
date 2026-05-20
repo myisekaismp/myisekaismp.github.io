@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Export</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.3.0/github-markdown-dark.min.css">
+  <script>
+      window.MathJax = {
+          tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']],
+              processEscapes: true
+          }
+      };
+  </script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+  <style>
+      body {
+          background-color: #0d1117;
+          color: #c9d1d9;
+      }
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          background-color: #0d1117;
+          color: #c9d1d9;
+      }
+
+      /* Syntax Highlighting */
+      .hljs-doctag, .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-variable.language_ { color: #ff7b72; }
+      .hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_ { color: #d2a8ff; }
+      .hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-number, .hljs-operator, .hljs-variable, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id { color: #79c0ff; }
+      .hljs-regexp, .hljs-string, .hljs-meta .hljs-string { color: #a5d6ff; }
+      .hljs-built_in, .hljs-symbol { color: #ffa657; }
+      .hljs-comment, .hljs-code, .hljs-formula { color: #8b949e; }
+      .hljs-name, .hljs-quote, .hljs-selector-tag, .hljs-selector-pseudo { color: #7ee787; }
+      .hljs-subst { color: #c9d1d9; }
+      .hljs-section { color: #1f6feb; font-weight: bold; }
+      .hljs-bullet { color: #79c0ff; }
+      .hljs-emphasis { font-style: italic; }
+      .hljs-strong { font-weight: bold; }
+      .hljs-addition { color: #aff5b4; background-color: #033a16; }
+      .hljs-deletion { color: #ffdcd7; background-color: #67060c; }
+
+      .markdown-alert {
+          padding: 0.5rem 1rem;
+          margin-bottom: 16px;
+          border-left: 0.25em solid;
+          border-radius: 0.375rem;
+      }
+      .markdown-alert > :last-child {
+          margin-bottom: 0;
+      }
+      .markdown-alert-title {
+          margin: 0 0 8px;
+          font-weight: 600;
+          line-height: 1.25;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+      }
+      .markdown-alert-icon {
+          display: inline-flex;
+          width: 16px;
+          height: 16px;
+      }
+      .markdown-alert-icon svg {
+          width: 16px;
+          height: 16px;
+          fill: currentColor;
+      }
+      .markdown-alert-note { color: #4493f8; border-left-color: #4493f8; background-color: rgba(31, 111, 235, 0.15); }
+      .markdown-alert-tip { color: #3fb950; border-left-color: #3fb950; background-color: rgba(35, 134, 54, 0.15); }
+      .markdown-alert-important { color: #ab7df8; border-left-color: #ab7df8; background-color: rgba(137, 87, 229, 0.15); }
+      .markdown-alert-warning { color: #d29922; border-left-color: #d29922; background-color: rgba(210, 153, 34, 0.18); }
+      .markdown-alert-caution { color: #f85149; border-left-color: #f85149; background-color: rgba(248, 81, 73, 0.18); }
+      .markdown-alert > *:not(.markdown-alert-title) { color: #c9d1d9; }
+
+      @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+      }
+  </style>
+</head>
+<body>
+  <article class="markdown-body">
+      <h1>Guia de Comandos Customizados (KubeJS)</h1>
+<p>Este documento contém a documentação completa de todos os comandos customizados registrados via KubeJS no servidor. Os comandos estão divididos por categorias e incluem tanto comandos de barra (<code>/</code>) quanto comandos de chat (<code>!</code>).</p>
+<hr>
+<h2>1. Comandos Gerais (Gerais)</h2>
+<p>Disponíveis para todos os jogadores do servidor.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Comando</th>
+<th align="center">Tipo</th>
+<th align="left">Sintaxe</th>
+<th align="left">Descrição</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>rolar</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/rolar &lt;dado&gt; [modo]</code></td>
+<td align="left">Rola um dado (opções: <code>d2</code>, <code>d4</code>, <code>d6</code>, <code>d8</code>, <code>d10</code>, <code>d12</code>, <code>d20</code>, <code>d100</code>). Use o modo <code>silent</code> para que o resultado apareça apenas para você.</td>
+</tr>
+<tr>
+<td align="left"><strong>top</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/top &lt;categoria&gt; [pagina/buscar &lt;player&gt;]</code></td>
+<td align="left">Exibe rankings globais. Categorias: <code>mortes</code>, <code>tempovivo</code>, <code>tempototal</code>, <code>morteshora</code>, <code>distanciasolo</code>, <code>distanciaelytra</code>, <code>mobkills</code>, <code>playerkills</code>, <code>lootr</code>.</td>
+</tr>
+<tr>
+<td align="left"><strong>track</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/track &lt;player/stop&gt;</code></td>
+<td align="left">Ativa ou desativa um overlay visual na tela mostrando a vida (HP) e o escudo (Magic Shield) do jogador alvo.</td>
+</tr>
+<tr>
+<td align="left"><strong>voar</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/voar</code></td>
+<td align="left">Ativa/desativa o voo criativo para si mesmo.</td>
+</tr>
+<tr>
+<td align="left"><strong>nicknames</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/nicknames</code> ou <code>!nomes</code> / <code>!nicks</code> / <code>!nicknames</code></td>
+<td align="left">Exibe a lista de todos os apelidos de RP dos jogadores online associados aos seus nomes de usuário reais.</td>
+</tr>
+<tr>
+<td align="left"><strong>deaths</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/deaths</code> ou <code>!deaths</code></td>
+<td align="left">Exibe o seu total de mortes e a sua vitalidade atual (percentual).</td>
+</tr>
+<tr>
+<td align="left"><strong>deaths (alvo)</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!deaths &lt;user&gt;</code></td>
+<td align="left">Exibe o total de mortes e vitalidade de outro jogador online.</td>
+</tr>
+<tr>
+<td align="left"><strong>fome</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/fome</code> ou <code>!fome</code></td>
+<td align="left">Define o nível de fome do jogador para 1 (usado estritamente para propósitos de Roleplay).</td>
+</tr>
+<tr>
+<td align="left"><strong>colors</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/colors</code> ou <code>!colors</code> / <code>!format</code></td>
+<td align="left">Lista todos os códigos de cor e estilo de chat do Minecraft (com prefixo <code>§</code>).</td>
+</tr>
+<tr>
+<td align="left"><strong>dimension</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/dimension</code> ou <code>!dim</code> / <code>!dimension</code></td>
+<td align="left">Exibe a dimensão em que você está atualmente.</td>
+</tr>
+<tr>
+<td align="left"><strong>position</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/position</code> ou <code>!pos</code> / <code>!position</code> / <code>!coords</code> / <code>!coordinates</code></td>
+<td align="left">Exibe suas coordenadas X, Y, Z exatas.</td>
+</tr>
+<tr>
+<td align="left"><strong>level</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/level</code> ou <code>!nv</code> / <code>!nivel</code> / <code>!lv</code> / <code>!level</code></td>
+<td align="left">Exibe o seu nível MMORPG atual.</td>
+</tr>
+<tr>
+<td align="left"><strong>insomnia</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/insomnia</code> ou <code>!insomnia</code> / <code>!phantom</code> / <code>!rest</code> / <code>!sleep</code></td>
+<td align="left">Exibe o tempo decorrido desde o seu último descanso e avisa se Phantoms podem spawnar.</td>
+</tr>
+<tr>
+<td align="left"><strong>lojas</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!lojas</code></td>
+<td align="left">Lista todas as lojas registradas no sistema.</td>
+</tr>
+<tr>
+<td align="left"><strong>loja</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!loja &lt;shopId&gt;</code></td>
+<td align="left">Lista todos os funcionários online associados a uma loja específica.</td>
+</tr>
+<tr>
+<td align="left"><strong>nurses</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!nurse</code> ou <code>!nurses</code></td>
+<td align="left">Lista todos os enfermeiros em serviço/online no momento.</td>
+</tr>
+<tr>
+<td align="left"><strong>batataquente</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!batataquente</code></td>
+<td align="left">Inicia o minigame "Batata Quente" se não houver um ativo.</td>
+</tr>
+<tr>
+<td align="left"><strong>mercenario</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/mercenario</code> ou <code>!mercenario</code></td>
+<td align="left">Executa um efeito sonoro e visual especial para a classe/profissão mercenário.</td>
+</tr>
+<tr>
+<td align="left"><strong>falsamorte</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!falsamorte</code></td>
+<td align="left">Comando de teste/debug de falsa morte (envia mensagem de teste).</td>
+</tr>
+<tr>
+<td align="left"><strong>questview</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!questview</code></td>
+<td align="left">Exibe a primeira página do livro de missões atual no console/log.</td>
+</tr>
+<tr>
+<td align="left"><strong>questset</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!questset</code></td>
+<td align="left">Reseta todos os quadros de missões do vilarejo para o estado padrão ("INATIVO").</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>2. Comandos de Nativos (Nativos)</h2>
+<p>Disponíveis para membros autorizados do grupo Nativo (<code>NATIVOS_GROUP</code> / tag <code>nativo</code>) ou Administradores.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Comando</th>
+<th align="center">Tipo</th>
+<th align="left">Sintaxe</th>
+<th align="left">Descrição</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>nativo</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/nativo</code> ou <code>!nativo</code> / <code>!nativos</code> / <code>!native</code></td>
+<td align="left">Alterna a tag de nativo (entra/sai do modo nativo).</td>
+</tr>
+<tr>
+<td align="left"><strong>builder</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/builder</code> ou <code>!builder</code></td>
+<td align="left">Alterna o modo construtor (permite quebrar blocos em áreas protegidas, altera para gamemode criativo e entra no time builder).</td>
+</tr>
+<tr>
+<td align="left"><strong>warp</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!warp</code></td>
+<td align="left">Teleporta o jogador para a "base off rp" de nativos.</td>
+</tr>
+<tr>
+<td align="left"><strong>author</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!author &lt;nome&gt;</code></td>
+<td align="left">Altera o autor do livro escrito que você está segurando na mão principal.</td>
+</tr>
+<tr>
+<td align="left"><strong>voucher</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!voucher</code></td>
+<td align="left">Exibe um menu clicável para escolher e obter vouchers de itens exclusivos (Funil de Bambu, Biplano, Dirigível).</td>
+</tr>
+<tr>
+<td align="left"><strong>givevoucher</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!givevoucher &lt;id&gt;</code></td>
+<td align="left">Concede diretamente o papel de voucher correspondente ao ID selecionado.</td>
+</tr>
+<tr>
+<td align="left"><strong>channel_nativo</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/n &lt;mensagem&gt;</code></td>
+<td align="left">Envia uma mensagem no canal de chat exclusivo de Nativos (visível para nativos e admins).</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>3. Comandos de Magias (Magias)</h2>
+<p>Disponíveis para magos autorizados (<code>AUTHORIZED_PLAYERS_MAGIAS</code>) ou Administradores.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Comando</th>
+<th align="center">Tipo</th>
+<th align="left">Sintaxe</th>
+<th align="left">Descrição</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>silencio</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!silencio &lt;player&gt;</code></td>
+<td align="left">Silencia o chat de voz (Simple Voice Chat) do jogador alvo.</td>
+</tr>
+<tr>
+<td align="left"><strong>fale</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!fale &lt;player&gt;</code></td>
+<td align="left">Libera o chat de voz do jogador alvo.</td>
+</tr>
+<tr>
+<td align="left"><strong>conter</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!conter &lt;player&gt;</code></td>
+<td align="left">Contém (prende/imobiliza) o jogador alvo.</td>
+</tr>
+<tr>
+<td align="left"><strong>liberar</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!liberar &lt;player&gt;</code></td>
+<td align="left">Libera o jogador contido.</td>
+</tr>
+<tr>
+<td align="left"><strong>prisao</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!prisao &lt;player&gt;</code></td>
+<td align="left">Envia o jogador contido diretamente para a dimensão de prisão.</td>
+</tr>
+<tr>
+<td align="left"><strong>revelio</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!revelio</code></td>
+<td align="left">Conjura revelação, dando efeito de brilhar (glowing) para entidades próximas num raio de 15 blocos.</td>
+</tr>
+<tr>
+<td align="left"><strong>matinta</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/matinta &lt;colar/coruja/mimetismo/assobio/casa&gt; [alvo]</code></td>
+<td align="left">Gerencia e ativa habilidades exclusivas da Matinta (requer permissão ou ser Matinta autorizada). colar gera o pingente de sangue Botania vinculado ao alvo.</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>4. Comandos de Administradores (Admin)</h2>
+<p>Restritos a Administradores (equipe <code>admin</code> ou OP nível 2+).</p>
+<table>
+<thead>
+<tr>
+<th align="left">Comando</th>
+<th align="center">Tipo</th>
+<th align="left">Sintaxe</th>
+<th align="left">Descrição</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>camera</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/camera</code></td>
+<td align="left">Liga/desliga o bloqueio global de uso do item de câmera.</td>
+</tr>
+<tr>
+<td align="left"><strong>clima</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/clima &lt;subcomando&gt;</code></td>
+<td align="left">Gerencia e agenda climas extremos. Subcomandos: <code>status</code>, <code>sol</code>, <code>chuva</code>, <code>tempestade</code>, <code>acido</code>, <code>calor</code>, <code>peixe</code>, <code>slime</code>, <code>hamburguer</code>, <code>estacao</code>, <code>chance</code>, <code>previsao</code>, <code>agendar</code>.</td>
+</tr>
+<tr>
+<td align="left"><strong>lastseen</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/lastseen &lt;dump/inactive&gt;</code></td>
+<td align="left">Gerencia dumps de atividade dos jogadores ou envia alertas de inatividade manualmente para o canal do Discord.</td>
+</tr>
+<tr>
+<td align="left"><strong>levels / niveis</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/levels</code> ou <code>/niveis</code></td>
+<td align="left">Exibe no chat a lista de níveis MMORPG de todos os jogadores online (Requer OP Nível 4).</td>
+</tr>
+<tr>
+<td align="left"><strong>persistentdata</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/persistentdata &lt;view/remove/set&gt; &lt;player&gt; [key] [data]</code></td>
+<td align="left">Visualiza, remove ou altera chaves e valores dos dados persistentes de NBT de um jogador.</td>
+</tr>
+<tr>
+<td align="left"><strong>rcdstorm</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/rcdstorm &lt;toggle/chance&gt;</code></td>
+<td align="left">Ativa ou altera a chance do evento de Tempestade Infinita (Enhanced Lightning).</td>
+</tr>
+<tr>
+<td align="left"><strong>toggledeathmsg</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/toggledeathmsg</code></td>
+<td align="left">Alterna a exibição global de mensagens de morte de roleplay.</td>
+</tr>
+<tr>
+<td align="left"><strong>voar (alvo)</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/voar &lt;alvo&gt;</code></td>
+<td align="left">Alterna o voo criativo para outro jogador.</td>
+</tr>
+<tr>
+<td align="left"><strong>channel_admin</strong></td>
+<td align="center"><code>/</code></td>
+<td align="left"><code>/a &lt;mensagem&gt;</code></td>
+<td align="left">Envia uma mensagem no canal de chat restrito da Staff/Admin.</td>
+</tr>
+<tr>
+<td align="left"><strong>xp</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!xp</code></td>
+<td align="left">Lista os jogadores online ordenados pela experiência (XP) MMORPG atual.</td>
+</tr>
+<tr>
+<td align="left"><strong>op</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!op</code></td>
+<td align="left">Insere o próprio administrador na equipe <code>admin</code> e concede OP nativo no Minecraft.</td>
+</tr>
+<tr>
+<td align="left"><strong>deop</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!deop</code></td>
+<td align="left">Remove o próprio de OP e o retira da equipe <code>admin</code>.</td>
+</tr>
+<tr>
+<td align="left"><strong>resetinsomnia</strong></td>
+<td align="center"><code>/</code> ou <code>!</code></td>
+<td align="left"><code>/resetInsomnia</code> ou <code>!resetinsomnia</code> / <code>!resetphantom</code> / <code>!resetrest</code> / <code>!resetsleep</code></td>
+<td align="left">Reseta o temporizador de insônia do próprio jogador (ou reseta o seu próprio se usado sem argumentos).</td>
+</tr>
+<tr>
+<td align="left"><strong>flu</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!flu &lt;user&gt;</code></td>
+<td align="left">Infecta manualmente o jogador especificado com gripe comum.</td>
+</tr>
+<tr>
+<td align="left"><strong>cureflu</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!cureflu &lt;user&gt;</code></td>
+<td align="left">Cura manualmente a gripe do jogador especificado.</td>
+</tr>
+<tr>
+<td align="left"><strong>infect</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!infect &lt;user&gt;</code></td>
+<td align="left">Infecta o jogador especificado com Febre do Abismo (doença do End).</td>
+</tr>
+<tr>
+<td align="left"><strong>cure</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!cure &lt;user&gt;</code></td>
+<td align="left">Cura o jogador especificado da Febre do Abismo (doença do End).</td>
+</tr>
+<tr>
+<td align="left"><strong>injured / feridos</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!injured</code> ou <code>!ferido</code> / <code>!feridos</code></td>
+<td align="left">Lista todos os jogadores infectados ou feridos online (acessível também a enfermeiros).</td>
+</tr>
+<tr>
+<td align="left"><strong>cmd</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!cmd &lt;target&gt;</code></td>
+<td align="left">Executa comandos de teste de administração.</td>
+</tr>
+<tr>
+<td align="left"><strong>send</strong></td>
+<td align="center"><code>!</code></td>
+<td align="left"><code>!send &lt;msg&gt;</code></td>
+<td align="left">Cancelador de chat para testes de mensagens de nativos por admins.</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <script>
+      window.addEventListener('load', function () {
+          if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+              window.MathJax.typesetPromise().catch(function (err) {
+                  console.warn('MathJax typeset failed:', err);
+              });
+          }
+      });
+  </script>
+</body>
+</html>
